@@ -22,6 +22,16 @@ public struct DieResult {
 		}
 	}
 
+	public var values: [Int] {
+		var output = [value]
+		if let extendedResult = extendedResult,
+		   case ExtendedResult.explode(let result) = extendedResult {
+			output.append(contentsOf: result.values)
+		}
+
+		return output
+	}
+
 	/// A `String` representation of the roll. This includes any exploding dice or rerolls
 	public var result: String {
 		guard let extendedResult = extendedResult else {
